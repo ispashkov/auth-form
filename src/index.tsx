@@ -1,19 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import * as React from 'react'
+import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
+import { createRoot } from 'react-dom/client'
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import { App } from './app/app.component'
+import { APP_CLASSNAMES_PREFIX } from './app/app.config'
+import reportWebVitals from './reportWebVitals'
+import { isDef } from './types/lang.types'
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const cache = createCache({
+  key: APP_CLASSNAMES_PREFIX,
+})
+
+const container = document.getElementById('root')
+
+if (isDef(container)) {
+  const root = createRoot(container)
+
+  root.render(
+    <CacheProvider value={cache}>
+      <App />
+    </CacheProvider>
+  )
+}
+
+reportWebVitals()

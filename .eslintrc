@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended", "plugin:import/typescript"],
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "rules": {
+    "prettier/prettier": "error",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "groups": ["builtin", "external", "parent", "sibling", "index"]
+      }
+    ]
+  }
+}
